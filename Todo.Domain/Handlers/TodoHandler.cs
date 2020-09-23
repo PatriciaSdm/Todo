@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Todo.Domain.Commands;
 using Todo.Domain.Commands.Contracts;
+using Todo.Domain.Entities;
 using Todo.Domain.Handlers.Contracts;
 using Todo.Domain.Repositories;
 
@@ -27,9 +28,14 @@ namespace Todo.Domain.Handlers
             if (command.Invalid)
                 return new GenericCommandResult(false, "Ops, parece que a sua tarefa esta errada!", command.Notifications);
 
-            //Salvar um todo no banco
+            //Gera o TodoItem
+            var todo = new TodoItem(command.Title, command.User, command.Date);
+
+            //Salvar no banco
+            _repository.Create(todo);
 
             //Notificar o usuário
+            return new GenericCommandResult(true, "Tarefa salva", todo);
         }
     }
 }
