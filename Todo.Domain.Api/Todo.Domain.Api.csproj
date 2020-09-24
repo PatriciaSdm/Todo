@@ -5,6 +5,10 @@
     <ProjectReference Include="..\Todo.Domain.Infra\Todo.Domain.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
