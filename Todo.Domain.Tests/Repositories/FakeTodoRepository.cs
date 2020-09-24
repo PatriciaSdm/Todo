@@ -8,6 +8,10 @@ namespace Todo.Domain.Tests.Repositories
 {
     public class FakeTodoRepository : ITodoRepository
     {
+        public TodoItem GetById(Guid id, string user)
+        {
+            return new TodoItem("Titulo", "User", DateTime.Now);
+        }
         public void Create(TodoItem todo)
         {
         }
