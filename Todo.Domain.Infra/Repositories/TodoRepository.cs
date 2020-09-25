@@ -22,29 +22,37 @@ namespace Todo.Domain.Infra.Repositories
         public IEnumerable<TodoItem> GetAll(string user)
         {
             //AsNoTracking = usar quando não vai fazer um update ou delete no objeto, elimina um passo e deixa mais rapido
-            return _context.Todos.AsNoTracking()
-                                 .Where(TodoQueries.GetAll(user))
-                                 .OrderBy(x => x.Date);
+            return _context.Todos
+                           .AsNoTracking()
+                           .Where(TodoQueries.GetAll(user))
+                           .OrderBy(x => x.Date);
         }
 
         public IEnumerable<TodoItem> GetAllDone(string user)
         {
-            throw new NotImplementedException();
+            return _context.Todos.AsNoTracking()
+                                .Where(TodoQueries.GetAllDone(user))
+                                .OrderBy(x => x.Date);
         }
 
         public IEnumerable<TodoItem> GetAllUndone(string user)
         {
-            throw new NotImplementedException();
+            return _context.Todos.AsNoTracking()
+                                 .Where(TodoQueries.GetAllUndone(user))
+                                 .OrderBy(x => x.Date);
         }
 
         public TodoItem GetById(Guid id, string user)
         {
-            throw new NotImplementedException();
+            return _context.Todos
+                           .FirstOrDefault(x => x.Id == id && x.User == user);
         }
 
         public IEnumerable<TodoItem> GetByPeriod(string user, DateTime date, bool done)
         {
-            throw new NotImplementedException();
+            return _context.Todos.AsNoTracking()
+                              .Where(TodoQueries.GetByPeriod(user, date, done))
+                              .OrderBy(x => x.Date);
         }
 
         public void Create(TodoItem todo)
