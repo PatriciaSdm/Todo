@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Todo.Domain.Commands;
+using Todo.Domain.Entities;
 using Todo.Domain.Handlers;
+using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Api.Controllers
 {
@@ -13,6 +15,12 @@ namespace Todo.Domain.Api.Controllers
     public class TodoController : ControllerBase
     {
 
+        [Route("")]
+        [HttpGet]
+        public IEnumerable<TodoItem> GetAll([FromServices]ITodoRepository repository)
+        {
+            return repository.GetAll("patriciamatta");
+        }
 
         [Route("")]
         [HttpPost]
