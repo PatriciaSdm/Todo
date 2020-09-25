@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Todo.Domain.Entities;
 using Todo.Domain.Infra.Contexts;
+using Todo.Domain.Queries;
 using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Infra.Repositories
@@ -19,7 +21,10 @@ namespace Todo.Domain.Infra.Repositories
 
         public IEnumerable<TodoItem> GetAll(string user)
         {
-            throw new NotImplementedException();
+            //AsNoTracking = usar quando não vai fazer um update ou delete no objeto, elimina um passo e deixa mais rapido
+            return _context.Todos.AsNoTracking()
+                                 .Where(TodoQueries.GetAll(user))
+                                 .OrderBy(x => x.Date);
         }
 
         public IEnumerable<TodoItem> GetAllDone(string user)
