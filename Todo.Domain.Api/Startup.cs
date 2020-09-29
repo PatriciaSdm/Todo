@@ -29,8 +29,8 @@ namespace Todo.Domain.Api
             //services.AddScoped - Um "singleton/instancia" por requisição - ex: datacontext, uma conexão por transação, não precisa abrir sempre
             //services.AddSingleton - Uma instancia para a aplicação toda
 
-            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database")); //db em memória
-                                                                                            //services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionstring"));
+            //services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database")); //db em memória
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionstring")));
 
             services.AddTransient<ITodoRepository, TodoRepository>();
             services.AddTransient<TodoHandler, TodoHandler>();

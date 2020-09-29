@@ -77,15 +77,15 @@ namespace Todo.Domain.Api.Controllers
         }
 
         [Route("")]
-        [HttpPost]
+        [HttpPut]
         public GenericCommandResult Update([FromBody] UpdateTodoCommand command, [FromServices] TodoHandler handler) //FromServices vem do startup
         {
             command.User = "patriciamatta";
             return (GenericCommandResult)handler.Handle(command);
         }
 
-        [Route("")]
-        [HttpPost]
+        [Route("mark-as-done")]
+        [HttpPut]
         public GenericCommandResult MarkAsDone([FromBody] MarkTodoAsDoneCommand command, [FromServices] TodoHandler handler) //FromServices vem do startup
         {
             command.User = "patriciamatta";
